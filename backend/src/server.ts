@@ -5,11 +5,13 @@ import http from 'http';
 import resolvers from './resolvers';
 import typeDefs from './schema';
 import mongoose from 'mongoose';
+import cors from 'cors';
 
 async function listen(port: number): Promise<any> {
 	const app = express();
 	const httpServer = http.createServer(app);
 
+	app.use(cors());
 	const server = new ApolloServer({
 		typeDefs,
 		resolvers,
