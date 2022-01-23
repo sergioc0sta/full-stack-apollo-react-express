@@ -9,6 +9,9 @@
   },
   "dependencies": {
     "@apollo/client": "^3.5.7",
+    "@emotion/css": "^11.7.1",
+    "@emotion/react": "^11.7.1",
+    "@emotion/styled": "^11.6.0",
     "deepmerge": "^4.2.2",
     "graphql": "^16.2.0",
     "lodash": "^4.17.21",
