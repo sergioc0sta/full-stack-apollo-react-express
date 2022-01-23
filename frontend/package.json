@@ -7,6 +7,23 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,tsx,ts}": [
+      "eslint --fix -f git-log",
+      "prettier --write",
+      "git add"
+    ],
+    "*.{js,tsx,ts}/": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.{js,css,md}": "prettier --write"
+  },
   "dependencies": {
     "@apollo/client": "^3.5.7",
     "@emotion/css": "^11.7.1",
@@ -22,8 +39,21 @@
   "devDependencies": {
     "@types/node": "^17.0.10",
     "@types/react": "^17.0.38",
-    "eslint": "8.7.0",
+    "eslint": "^8.7.0",
+    "eslint-config-airbnb": "^19.0.4",
     "eslint-config-next": "12.0.8",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "eslint-plugin-security": "^1.4.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "eslint-plugin-sonarjs": "^0.11.0",
+    "eslint-plugin-unicorn": "^40.1.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.3.1",
+    "prettier": "^2.5.1",
     "typescript": "^4.5.5"
   }
 }
