@@ -1,4 +1,4 @@
-import { injectGlobal } from '@emotion/css'
+import { injectGlobal } from '@emotion/css';
 injectGlobal`
   html,
   body {
@@ -16,4 +16,4 @@ injectGlobal`
   * {
     box-sizing: border-box;
   }
-`
+`;

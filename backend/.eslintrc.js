@@ -1,22 +1,24 @@
 module.exports = {
-	'env': {
+	env: {
 		'browser': true,
 		'es2021': true
 	},
-	'extends': [
+	extends: [
 		'eslint:recommended',
 		'plugin:@typescript-eslint/recommended'
 	],
-	'parser': '@typescript-eslint/parser',
-	'parserOptions': {
+	parser: '@typescript-eslint/parser',
+	parserOptions: {
 		'ecmaVersion': 'latest',
 		'sourceType': 'module'
 	},
-	'plugins': [
+	plugins: [
 		'@typescript-eslint'
 	],
-	'rules': {
-		'indent': [
+	rules: {
+		'no-console': 'error',
+		'no-unused-vars': 'error',
+		indent: [
 			'error',
 			'tab'
 		],
@@ -24,11 +26,11 @@ module.exports = {
 			'error',
 			'unix'
 		],
-		'quotes': [
+		quotes: [
 			'error',
 			'single'
 		],
-		'semi': [
+		semi: [
 			'error',
 			'always'
 		]

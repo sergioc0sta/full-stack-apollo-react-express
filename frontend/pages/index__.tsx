@@ -1,11 +1,11 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
-import { gql } from "@apollo/client";
-import client from "../apollo/apollo-client";
+import Head from 'next/head';
+import Image from 'next/image';
+import styles from '../styles/Home.module.css';
+import { gql } from '@apollo/client';
+import client from '../apollo/apollo-client';
 
-export default function Home({users}) {
-  console.log("🚀 ~ file: index.tsx ~ line 8 ~ Home ~ users", users)
+export default function Home({ users }) {
+  console.log('🚀 ~ file: index.tsx ~ line 8 ~ Home ~ users', users);
   return (
     <div className={styles.container}>
       <Head>
@@ -68,13 +68,13 @@ export default function Home({users}) {
         </a>
       </footer>
     </div>
-  )
+  );
 }
- 
+
 export async function getServerSideProps() {
   const { data } = await client.query({
     query: gql`
-      query  {
+      query {
         getAllUsers {
           name
           surName
@@ -82,12 +82,12 @@ export async function getServerSideProps() {
           birthday
         }
       }
-    `,
+    `
   });
 
   return {
     props: {
-      users: data.getAllUsers,
-    },
- };
+      users: data.getAllUsers
+    }
+  };
 }
