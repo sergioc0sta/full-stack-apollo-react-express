@@ -1,27 +1,25 @@
+scalar Date
 
-    scalar Date
-    
-    type Query {
-        getAllUsers: [User]
-        user(userId: ID!): User!
-    }
+type Query {
+    getAllUsers: [User]
+    user(userId: ID!): User!
+}
 
-    type Mutation {
-        createUser(user: UserInput): User
-    }
+type Mutation {
+    createUser(user: UserInput): User
+}
 
-    input UserInput {
-        name: String
-        surName: String
-        country: String
-        birthday: String
-    }
+input UserInput {
+    name: String
+    surName: String
+    country: String
+    birthday: String
+}
 
-    type User {
-        id: ID
-        name: String
-        surName: String
-        country: String
-        birthday: Date
-    }
-
+type User {
+    id: ID
+    name: String
+    surName: String
+    country: String
+    birthday: Date
+}
