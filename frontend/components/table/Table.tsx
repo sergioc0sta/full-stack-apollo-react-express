@@ -1,20 +1,10 @@
 import React from 'react';
 import TableStyle from './TableStyle';
-import { useQuery, gql } from '@apollo/client';
-
-const QUERY = gql`
-    query {
-        getAllUsers {
-            name
-            surName
-            id
-            birthday
-        }
-    }
-`;
+import { useQuery } from '@apollo/client';
+import getAllUsers from './queries/getAllUsers'
 
 const Table = () => {
-    const { data, loading, error } = useQuery(QUERY);
+    const { data, loading, error } = useQuery(getAllUsers);
 
     if (loading) {
         return <h2>Loading...</h2>;
@@ -37,7 +27,7 @@ const Table = () => {
                 <tr key={user.id}>
                     <td>{user.name}</td>
                     <td>{user.surName}</td>
-                    <td>{user.birthday.slice(0, 10)}</td>
+                    <td>{user?.birthday?.slice(0, 10)}</td>
                 </tr>
             ))}
         </TableStyle>

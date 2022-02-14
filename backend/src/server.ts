@@ -11,6 +11,9 @@ async function listen(port: number): Promise<any> {
 	const app = express();
 	const httpServer = http.createServer(app);
 
+	app.use('/graphqlSchema', async (res, rep) => {
+		rep.sendFile('schema/graphql-schema.graphql' , { root : __dirname});	});
+
 	app.use(cors());
 	const server = new ApolloServer({
 		typeDefs,

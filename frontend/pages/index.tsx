@@ -3,17 +3,15 @@ import client from '../apollo/apollo-client';
 import IndexLayout from './IndexLayout';
 import Form from '../components/form/Form';
 import Table from '../components/table';
+import Container from '../components/container';
 
 export default function Home({ users }) {
-    console.log('🚀 ~ file: index.tsx ~ line 8 ~ Home ~ users', users);
     return (
         <IndexLayout>
-            <div>
+            <Container>
                 <Form />
-            </div>
-            <div>
                 <Table />
-            </div>
+            </Container>
         </IndexLayout>
     );
 }
@@ -29,12 +27,12 @@ export async function getServerSideProps() {
                     birthday
                 }
             }
-        `
+        `,
     });
 
     return {
         props: {
-            users: data.getAllUsers
-        }
+            users: data.getAllUsers,
+        },
     };
 }

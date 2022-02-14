@@ -1,8 +1,10 @@
-import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { ApolloClient, InMemoryCache, HttpLink } from '@apollo/client';
 
 const client = new ApolloClient({
     ssrMode: typeof window === 'undefined',
-    uri: 'http://localhost:4949/graphql',
+    link: new HttpLink({
+        uri: 'http://localhost:4949/graphql',
+    }),
     cache: new InMemoryCache(),
 });
 
