@@ -8,16 +8,58 @@ const DataPersonStyle = styled.div`
     flex: 1;
     order: 1;
     margin-right: 2em;
+    justify-content: flex-end;
+`;
+
+const InputStyle = styled.div`
+    padding: 1.5rem 0rem 1.5rem 1.5rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    & > label {
+        width: 40%;
+        font-size: 1.5rem;
+        color: blue;
+    }
+
     & > input,
     select {
-        width: 100%;
+        width: 60%;
+        font-size: 1rem;
+        border: 0.1rem solid blue;
+        color: blue;
+        background: white;
     }
 `;
 
+const Buttonstyle = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    & > button {
+        padding: 1rem;
+        font-size: 1.5rem;
+        color: blue;
+    }
+`;
+
+const FooterStyle = styled.div`
+    display: flex;    
+    padding: 2rem;
+    width: 80%
+    justify-content: center;
+   
+    & > div {
+        background: darkseagreen;
+        border-radius:0.5rem;
+        width: 100%;
+        padding:1rem;
+    }
+`;
 const Form = () => {
-    const [inputs, setInputs] = useState({});
+    const [inputs, setInputs] = useState({ name: null, sname: null, country: null, birthdaytime: null });
     const refOfForm = useRef<HTMLFormElement>(null);
-    const [addTodo] = useMutation(createUser);
+    const [addTodo, { data, error }] = useMutation(createUser);
 
     const handleChange = (event: any) => {
         const name = event.target.name;
@@ -41,24 +83,43 @@ const Form = () => {
         <FormStyle>
             <form id="form" onSubmit={handlerSubmit} ref={refOfForm}>
                 <DataPersonStyle>
-                    <label>Name:</label>
-                    <input type="text" name="name" onChange={handleChange} />
-                    <label>Surame:</label>
-                    <input type="text" name="sname" onChange={handleChange} />
-                    <label>Country:</label>
-                    <select name="country" onChange={handleChange}>
-                        <option value="Portugal">Portugal</option>
-                        <option value="Franca">Franca</option>
-                        <option value="Espanha">Espanha</option>
-                        <option value="Malta">Malta</option>
-                    </select>
-                    <label>Birthday:</label>
-                    <input type="date" id="birthdaytime" name="birthdaytime" onChange={handleChange} />
-                    <button type="submit" value="reset">
-                        Guardar
-                    </button>
+                    <InputStyle>
+                        <label>Name:</label>
+                        <input type="text" name="name" onChange={handleChange} required />
+                    </InputStyle>
+                    <InputStyle>
+                        <label>Surame:</label>
+                        <input type="text" name="sname" onChange={handleChange} required />
+                    </InputStyle>
+                    <InputStyle>
+                        <label>Country:</label>
+                        <select name="country" onChange={handleChange} required>
+                            <option value="">Select...</option>
+                            <option value="Portugal">Portugal</option>
+                            <option value="Franca">Franca</option>
+                            <option value="Espanha">Espanha</option>
+                            <option value="Malta">Malta</option>
+                        </select>
+                    </InputStyle>
+                    <InputStyle>
+                        <label>Birthday:</label>
+                        <input type="date" id="birthdaytime" name="birthdaytime" onChange={handleChange} required />
+                    </InputStyle>
+                    <Buttonstyle>
+                        <button type="submit" value="reset">
+                            Guardar
+                        </button>
+                    </Buttonstyle>
                 </DataPersonStyle>
             </form>
+            {data && error === undefined ? (
+                <FooterStyle>
+                    <div>
+                        cenas ajksndkajsd akjs dkaj sdkj akjs dkja skjd kaj sdkja sjd akjs dkja sdk akjs dja sjdk akjsd
+                        akjs dkaj sdkja sdkaj ksd a
+                    </div>
+                </FooterStyle>
+            ) : null}
         </FormStyle>
     );
 };

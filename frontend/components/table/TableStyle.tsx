@@ -12,7 +12,7 @@ const TableStyle = styled.table`
     td {
         background-color: #dddddd;
         text-align: left;
-        padding: 2.4rem;
+        padding: 1rem;
     }
 `;
 
