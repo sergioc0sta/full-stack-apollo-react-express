@@ -3,6 +3,7 @@ import React from 'react';
 
 let apolloClient: any;
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function createApolloClient() {
     return new ApolloClient({
         ssrMode: typeof window === 'undefined', // set to true for SSR

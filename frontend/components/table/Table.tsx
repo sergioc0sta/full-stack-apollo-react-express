@@ -2,9 +2,11 @@ import React from 'react';
 import TableStyle from './TableStyle';
 import { useQuery } from '@apollo/client';
 import getAllUsers from './queries/getAllUsers';
+import { useTranslation } from 'next-i18next';
 
 const Table = () => {
     const { data, loading, error } = useQuery(getAllUsers);
+    const { t } = useTranslation();
 
     if (loading) {
         return <h2>Loading...</h2>;
@@ -20,9 +22,9 @@ const Table = () => {
         <TableStyle>
             <div>
                 <tr>
-                    <th>Name</th>
-                    <th>Country</th>
-                    <th>Birthday</th>
+                    <th>{t('name')}</th>
+                    <th>{t('country')}</th>
+                    <th>{t('birthday')}</th>
                 </tr>
                 {users.map((user) => (
                     <tr key={user.id}>

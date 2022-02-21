@@ -3,6 +3,7 @@ import React, { useRef, useState } from 'react';
 import FormStyle from './FormStyle';
 import { useMutation } from '@apollo/client';
 import createUser from './querie/getUsers';
+import { useTranslation } from 'next-i18next';
 
 const DataPersonStyle = styled.div`
     flex: 1;
@@ -60,6 +61,7 @@ const Form = () => {
     const [inputs, setInputs] = useState({ name: null, sname: null, country: null, birthdaytime: null });
     const refOfForm = useRef<HTMLFormElement>(null);
     const [addTodo, { data, error }] = useMutation(createUser);
+    const { t } = useTranslation();
 
     const handleChange = (event: any) => {
         const name = event.target.name;
@@ -84,17 +86,17 @@ const Form = () => {
             <form id="form" onSubmit={handlerSubmit} ref={refOfForm}>
                 <DataPersonStyle>
                     <InputStyle>
-                        <label>Name:</label>
+                        <label>{t('name')}:</label>
                         <input type="text" name="name" onChange={handleChange} required />
                     </InputStyle>
                     <InputStyle>
-                        <label>Surame:</label>
+                        <label>{t('surName')}:</label>
                         <input type="text" name="sname" onChange={handleChange} required />
                     </InputStyle>
                     <InputStyle>
-                        <label>Country:</label>
+                        <label>{t('countries')}:</label>
                         <select name="country" onChange={handleChange} required>
-                            <option value="">Select...</option>
+                            <option value="">{t('select')}</option>
                             <option value="Portugal">Portugal</option>
                             <option value="Franca">Franca</option>
                             <option value="Espanha">Espanha</option>
@@ -102,12 +104,12 @@ const Form = () => {
                         </select>
                     </InputStyle>
                     <InputStyle>
-                        <label>Birthday:</label>
+                        <label>{t('birthday')}:</label>
                         <input type="date" id="birthdaytime" name="birthdaytime" onChange={handleChange} required />
                     </InputStyle>
                     <Buttonstyle>
                         <button type="submit" value="reset">
-                            Guardar
+                            {t('save')}
                         </button>
                     </Buttonstyle>
                 </DataPersonStyle>
