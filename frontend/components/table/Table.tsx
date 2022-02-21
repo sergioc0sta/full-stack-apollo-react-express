@@ -1,5 +1,5 @@
 import React from 'react';
-import TableStyle from './TableStyle';
+import { TableStyle, DivStyle } from './TableStyle';
 import { useQuery } from '@apollo/client';
 import getAllUsers from './queries/getAllUsers';
 import { useTranslation } from 'next-i18next';
@@ -19,8 +19,8 @@ const Table = () => {
     const users = data?.getAllUsers;
 
     return (
-        <TableStyle>
-            <div>
+        <DivStyle>
+            <TableStyle>
                 <tr>
                     <th>{t('name')}</th>
                     <th>{t('country')}</th>
@@ -33,8 +33,8 @@ const Table = () => {
                         <td>{user?.birthday?.slice(0, 10)}</td>
                     </tr>
                 ))}
-            </div>
-        </TableStyle>
+            </TableStyle>
+        </DivStyle>
     );
 };
 

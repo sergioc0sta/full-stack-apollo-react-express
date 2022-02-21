@@ -1,11 +1,27 @@
 import styled from '@emotion/styled';
 
-const TableStyle = styled.table`
+export const DivStyle = styled.div`
     font-family: arial, sans-serif;
     border-collapse: collapse;
+
+    display: block;
+    overflow: auto;
+    height: 35rem;
     width: 50%;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+
+    flex-direction: column;
     border: 3px solid blue;
+    max-height: 100%;
+
+    @media only screen and (max-width: 768px) {
+        width: 100%;
+    }
+`;
+
+export const TableStyle = styled.table`
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
 
     & > td,
     th,
@@ -15,5 +31,3 @@ const TableStyle = styled.table`
         padding: 1rem;
     }
 `;
-
-export default TableStyle;

@@ -1,66 +1,16 @@
-import styled from '@emotion/styled';
 import React, { useRef, useState } from 'react';
-import FormStyle from './FormStyle';
-import { useMutation } from '@apollo/client';
+import { FormStyle, DataPersonStyle, InputStyle, Buttonstyle, FooterStyle } from './FormStyle';
+import { useQuery, useMutation } from '@apollo/client';
 import createUser from './querie/getUsers';
 import { useTranslation } from 'next-i18next';
+import getAllUsers from '../table/queries/getAllUsers';
+import { convertDate } from './utils/convertDate';
 
-const DataPersonStyle = styled.div`
-    flex: 1;
-    order: 1;
-    margin-right: 2em;
-    justify-content: flex-end;
-`;
-
-const InputStyle = styled.div`
-    padding: 1.5rem 0rem 1.5rem 1.5rem;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-
-    & > label {
-        width: 40%;
-        font-size: 1.5rem;
-        color: blue;
-    }
-
-    & > input,
-    select {
-        width: 60%;
-        font-size: 1rem;
-        border: 0.1rem solid blue;
-        color: blue;
-        background: white;
-    }
-`;
-
-const Buttonstyle = styled.div`
-    display: flex;
-    justify-content: flex-end;
-    & > button {
-        padding: 1rem;
-        font-size: 1.5rem;
-        color: blue;
-    }
-`;
-
-const FooterStyle = styled.div`
-    display: flex;    
-    padding: 2rem;
-    width: 80%
-    justify-content: center;
-   
-    & > div {
-        background: darkseagreen;
-        border-radius:0.5rem;
-        width: 100%;
-        padding:1rem;
-    }
-`;
 const Form = () => {
     const [inputs, setInputs] = useState({ name: null, sname: null, country: null, birthdaytime: null });
     const refOfForm = useRef<HTMLFormElement>(null);
     const [addTodo, { data, error }] = useMutation(createUser);
+    const { refetch } = useQuery(getAllUsers);
     const { t } = useTranslation();
 
     const handleChange = (event: any) => {
@@ -70,7 +20,6 @@ const Form = () => {
     };
     const handlerSubmit = (e: React.FormEvent): void => {
         e.preventDefault();
-        alert(JSON.stringify(inputs));
         addTodo({
             variables: {
                 name: inputs.name,
@@ -79,6 +28,7 @@ const Form = () => {
                 birthday: inputs.birthdaytime,
             },
         });
+        refetch();
         refOfForm?.current?.reset();
     };
     return (
@@ -117,8 +67,11 @@ const Form = () => {
             {data && error === undefined ? (
                 <FooterStyle>
                     <div>
-                        cenas ajksndkajsd akjs dkaj sdkj akjs dkja skjd kaj sdkja sjd akjs dkja sdk akjs dja sjdk akjsd
-                        akjs dkaj sdkja sdkaj ksd a
+                        {t('hello')}
+                        {` ${inputs.name} `} {t('from')} {` ${inputs.country} `} {t('on')}{' '}
+                        {` ${convertDate('day', inputs.birthdaytime)} `}
+                        {t('of')} {` ${convertDate('month', inputs.birthdaytime)} `} {t('youWillHave')}{' '}
+                        {` ${convertDate('year', inputs.birthdaytime)} `}
                     </div>
                 </FooterStyle>
             ) : null}
