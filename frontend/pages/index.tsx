@@ -1,11 +1,12 @@
 import { gql } from '@apollo/client';
-import client from '../apollo/apollo-client';
+import { initializeApollo } from '../apollo/apollo-client';
 import IndexLayout from './IndexLayout';
 import Form from '../components/form/Form';
 import Table from '../components/table';
 import Container from '../components/container';
 
-export default function Home({ users }) {
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+export default function Home() {
     return (
         <IndexLayout>
             <Container>
@@ -16,8 +17,11 @@ export default function Home({ users }) {
     );
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export async function getServerSideProps() {
-    const { data } = await client.query({
+    const apolloClient = initializeApollo();
+
+    await apolloClient.query({
         query: gql`
             query {
                 getAllUsers {
@@ -32,7 +36,7 @@ export async function getServerSideProps() {
 
     return {
         props: {
-            users: data.getAllUsers,
+            initialApolloState: apolloClient.cache.extract(),
         },
     };
 }
